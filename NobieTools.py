@@ -1,6 +1,8 @@
 import os
 import random
 from datetime import datetime
+import time
+import winsound
 
 def mainScreen():
     os.system("cls")
@@ -12,7 +14,7 @@ def mainScreen():
     """, "\n                        Made by nobie :D (duh... ._.)", "\n\n\n",
     "\n[1] Char counter",
     "\n[2] Account generator",
-    "\n[3] Placeholder",
+    "\n[3] Timer",
     "\n[99] Exit program",
     "\n[0] Go back to title screen")
     inputVal = int(input())
@@ -21,7 +23,7 @@ mainScreen()
 def countChars():
     CharCInput = str(input("Please enter a string you'd like to get the character count of : "))
     print("Character count: ", len(CharCInput))
-    input()
+    input("\n Press [ENTER] to go back to main screen.")
     mainScreen()
 def accGen():
     now = datetime.now()
@@ -52,7 +54,17 @@ def accGen():
         with open("Accounts.txt", "a") as fileobj:
             fileobj.write("Username: " + username + "\nPassword: " + password + "\n=-=--=- ["+ timeFormat +"] -=-=-=\n")
     print("\n\nAccounts saved to Accounts.txt sucessfully!")
-    input()
+    input("\n Press [ENTER] to go back to main screen.")
+def Timer():
+    mins = int(input("How many minutes minutes : "))
+    sec = int(input("How many seconds :"))
+    minsec = mins * 60 + sec
+    for i in range(1, minsec + 1):
+        print(i)
+        time.sleep(1)
+        if i == minsec:
+            winsound.Beep(1000, 1000)
+            input("\n Press [ENTER] to go back to main screen.")
 while "asd":
     if mainScreen() == 1:
         countChars()
@@ -62,3 +74,5 @@ while "asd":
         mainScreen()
     elif mainScreen() == 2:
         accGen()
+    elif mainScreen() == 3:
+        Timer()
