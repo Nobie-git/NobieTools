@@ -1,4 +1,7 @@
 import os
+import random
+from datetime import datetime
+
 def mainScreen():
     os.system("cls")
     print("""
@@ -15,15 +18,47 @@ def mainScreen():
     inputVal = int(input())
     return inputVal
 mainScreen()
-def chatCounter():
+def countChars():
     CharCInput = str(input("Please enter a string you'd like to get the character count of : "))
     print("Character count: ", len(CharCInput))
     input()
     mainScreen()
+def accGen():
+    now = datetime.now()
+    timeFormat = now.strftime("%Y/%B/%d | %H:%M:%S")
+
+    RBXCharTable = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+    '1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R',
+    'S','T','U','V','W','X','Y','Z']
+
+    usernameInput = int(input("How long do you want the username to be? (3-20) "))
+    passInput = int(input("How long do you want the password to be? "))
+    ammountOfAccounts = int(input("How many more do you want to make? (0 to make one)"))
+
+    for ammountOfAccounts in range(0, ammountOfAccounts):
+        username = ""
+        password = ""
+        if usernameInput >= 20:
+            for i in range(0, 20):
+                username = username + RBXCharTable[random.randint(0, len(RBXCharTable) - 1)]
+            for i in range(0, passInput):
+                password = password + chr(random.randint(20, 127))
+        if usernameInput <= 20:
+            for i in range(0, usernameInput):
+                username = username + RBXCharTable[random.randint(0, len(RBXCharTable) - 1)]
+            for i in range(0, passInput):
+                password = password + chr(random.randint(20, 127))
+        print("Username: " + username, "\nPassword: " + password, "\n=-=--=- ["+ timeFormat +"] -=-=-=")
+        with open("Accounts.txt", "a") as fileobj:
+            fileobj.write("Username: " + username + "\nPassword: " + password + "\n=-=--=- ["+ timeFormat +"] -=-=-=\n")
+    print("\n\nAccounts saved to Accounts.txt sucessfully!")
+    input()
 while "asd":
     if mainScreen() == 1:
-        chatCounter()
+        countChars()
     elif mainScreen() == 99:
         os.system("exit")
     elif mainScreen() == 0:
         mainScreen()
+    elif mainScreen() == 2:
+        accGen()
