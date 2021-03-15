@@ -15,6 +15,7 @@ def mainScreen():
     "\n[1] Char counter",
     "\n[2] Account generator",
     "\n[3] Timer",
+    "\n[4] Leak Zablinga",
     "\n[99] Exit program",
     "\n[0] Go back to title screen")
     inputVal = int(input())
@@ -76,3 +77,5 @@ while "asd":
         accGen()
     elif mainScreen() == 3:
         Timer()
+    elif mainScreen() == 4:
+        print("Never.")
